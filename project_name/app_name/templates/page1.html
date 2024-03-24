@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-color: #0f12e6;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            color: #009688; /* Teal */
+        }
+
+        .con_error {
+            border: 2px solid #e57373; /* Light Red */
+            background-color: #ffebee; /* Light Red background */
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #d32f2f; /* Darker Red */
+        }
+
+        input[type="text"], select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #009688; /* Teal */
+        }
+
+        .block {
+            margin-bottom: 10px;
+        }
+
+        .block input[type="text"] {
+            width: calc(100% - 100px);
+        }
+
+        .add-block, .remove-block {
+            background-color: #4caf50; /* Green */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-block:hover, .remove-block:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+
+        #submit {
+            background-color: #2196f3; /* Blue */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: #0b7dda; /* Darker Blue */
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Your other JavaScript code remains the same
+            
+            // Add dynamic Block fields
+            $(document).on('click', '.add-block', function () {
+                var currentBlock = $(this).closest('.block');
+                var newBlock = $(`<div class="block">
+                    <input type="text" name="blocks[]" placeholder="Block" class="Quan">
+                    <button type="button" class="add-block">Add Block</button>
+                    <button type="button" class="remove-block">Remove</button>
+                </div>`);
+                
+                // Insert the newBlock after the currentBlock
+                currentBlock.after(newBlock);
+                
+                // Attach a click event handler to the remove button for the new block
+                newBlock.find('.remove-block').click(function () {
+                    newBlock.remove();
+                });
+            });
+            
+            // Remove dynamic Block fields
+            $(document).on('click', '.remove-block', function () {
+                $(this).closest('.block').remove();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Page 1</h1>
+    <form method="post" action="{% url 'save_page1' %}">
+        {% csrf_token %}
+        <!-- <div class="con_error">
+            <!-- 
+            This is an error message.
+        </div> -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="nam" required>
+        
+        <label for="country">Country:</label>
+         
+        <select name="country" id="country" class="blur" required>
+            <option value="" selected>-- Select --</option>
+            {% for country_code, country_name in countries %}
+                <option value="{{ country_code }}">{{ country_name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label>Block:</label>
+        <div id="blocks">
+            <div class="block">
+                <input type="text" name="blocks[]" placeholder="Block" class="Quan">
+                <button type="button" class="add-block">Add Block</button>
+                
+            </div>
+        </div>
+        
+
+        <button type="submit" id="submit">Save</button>
+    </form>
+</body>
+</html>

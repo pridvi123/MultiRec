@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9; /* Light Grey */
+            color: #333; /* Dark Grey */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            color: #3f51b5; /* Indigo */
+        }
+
+        p {
+            color: #757575; /* Grey */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: "\2022"; /* Bullet point */
+            color: #f44336; /* Red */
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        a {
+            color: #009688; /* Teal */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #00796b; /* Darker Teal */
+        }
+    </style>
+</head>
+<body>
+    <h1>Page 3</h1>
+    <p>Name: <span class="m">{{ name.name }}</span></p>
+    <p>Country: <span class="m">{{ country }}</span></p>
+
+    <h2>Blocks:</h2>
+    <ul>
+        {% for block in blocks %}
+            <li>{{ block.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Fields:</h2>
+    <ul>
+        {% for block in blocks %}
+            <h3>Block: <span class="m">{{ block.name }}</span></h3>
+            <ul>
+                {% for field in fields %}
+                    {% if field.block_fk == block %}
+                        <li>{{ field.name }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'page1' %}" type="button"  class="m">Back</a>
+</body>
+</html>

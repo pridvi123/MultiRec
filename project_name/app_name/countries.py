@@ -1,0 +1,23 @@
+COUNTRIES = (
+    ("US", "United States"),
+    ("CA", "Canada"),
+    ("GB", "United Kingdom"),
+    ("AU", "Australia"),
+    ("NZ", "New Zealand"),
+    ("FR", "France"),
+    ("DE", "Germany"),
+    ("IT", "Italy"),
+    ("ES", "Spain"),
+    ("JP", "Japan"),
+    ("KR", "South Korea"),
+    ("CN", "China"),
+    ("IN", "India"),
+    ("BR", "Brazil"),
+    ("MX", "Mexico"),
+    ("AR", "Argentina"),
+    ("ZA", "South Africa"),
+    ("NG", "Nigeria"),
+    ("SA", "Saudi Arabia"),
+    ("PK", "Pakistan"),
+    # Add more countries as needed
+)
